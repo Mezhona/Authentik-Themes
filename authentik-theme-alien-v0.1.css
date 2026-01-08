@@ -1,0 +1,433 @@
+/* ==========================================================================
+   THEME: USCSS NOSTROMO (LV-426)
+   VERSION: 0.1
+   AUTHOR: [Your Name/Handle]
+   DESCRIPTION: A high-fidelity retro sci-fi theme for Authentik, inspired by 
+                1979 industrial computer terminals.
+   
+   FEATURES:
+   - CRT Simulation: Scanlines, vignette, and signal noise overlays.
+   - Retro Typography: Michroma (Headers) & Quantico (Data) fonts.
+   - Terminal Aesthetics: High-contrast phosphor green palette.
+   - Layout Protection: Scoped styling to ensure Admin Interface stability.
+   - Reactive Components: "Red Alert" states for danger actions.
+   - High Readability: Custom contrast handling for alerts and info boxes.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Michroma&family=Quantico:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* ==========================================================================
+   1. GLOBAL VARIABLES & PALETTE
+   ========================================================================== */
+:root {
+    /* -- CORE PALETTE -- */
+    --alien-acid: #b6ff00;       /* Primary Phosphor Green */
+    --alien-acid-dim: #4a6600;   /* Dimmed/Burnt Phosphor */
+    --alien-bg: #050505;         /* Void Black */
+    --alien-panel: #0d0d0d;      /* UI Panel Black */
+    --alien-alert: #ff3300;      /* System Alert Red */
+    
+    /* -- AUTHENTIK OVERRIDES -- */
+    --ak-flow-background: #020202; 
+    --ak-primary: var(--alien-acid) !important;
+    
+    /* -- PATTERNFLY OVERRIDES -- */
+    --pf-global--primary-color--100: var(--alien-acid) !important;
+    --pf-global--link--Color: var(--alien-acid) !important;
+    --pf-global--link--Color--hover: #ffffff !important;
+    
+    /* Force Dark Mode Colors */
+    --pf-global--BackgroundColor--100: var(--alien-bg) !important;
+    --pf-global--BackgroundColor--200: var(--alien-panel) !important;
+    --pf-global--Color--100: var(--alien-acid) !important;
+    --pf-global--Color--200: var(--alien-acid) !important;
+    
+    /* -- TYPOGRAPHY CONFIGURATION -- */
+    --pf-global--FontFamily--sans-serif: 'Quantico', sans-serif !important;
+    --pf-global--FontFamily--heading: 'Michroma', sans-serif !important;
+    --pf-global--FontFamily--monospace: 'Quantico', monospace !important;
+    
+    color-scheme: dark !important;
+}
+
+/* ==========================================================================
+   2. CRT VISUAL EFFECTS (OVERLAY LAYER)
+   ========================================================================== */
+/* Implemented as fixed overlays to avoid affecting layout stacking contexts.
+   Pointer-events are disabled to allow clicking through to content.
+*/
+
+/* Scanline Effect */
+html::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 9000; 
+    background-size: 100% 3px, 3px 100%;
+    pointer-events: none;
+}
+
+/* Vignette & Signal Flicker Animation */
+html::after {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0; left: 0; bottom: 0; right: 0;
+    box-shadow: inset 0 0 10rem rgba(0,0,0,0.9); 
+    background: rgba(0,0,0,0);
+    z-index: 9000;
+    pointer-events: none;
+    animation: crt-flicker-overlay 0.15s infinite;
+}
+
+@keyframes crt-flicker-overlay {
+    0% { background: rgba(0,0,0,0.01); }
+    5% { background: rgba(0,0,0,0.04); }
+    10% { background: rgba(0,0,0,0.01); }
+    15% { background: rgba(0,0,0,0.00); }
+    20% { background: rgba(0,0,0,0.03); }
+    25% { background: rgba(0,0,0,0.01); }
+    30% { background: rgba(0,0,0,0.02); }
+    50% { background: rgba(0,0,0,0.01); }
+    80% { background: rgba(0,0,0,0.02); }
+    100% { background: rgba(0,0,0,0.01); }
+}
+
+/* Body Reset - Prevents layout shifting from animations */
+body {
+    animation: none !important;
+    overflow-x: hidden;
+    background-color: #000 !important;
+}
+
+/* ==========================================================================
+   3. TYPOGRAPHY & GLOW EFFECTS
+   ========================================================================== */
+body, p, span, div, a, input, textarea, select, label, td, th {
+    font-family: 'Quantico', sans-serif; 
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 4px rgba(182, 255, 0, 0.4);
+}
+
+h1, h2, h3, h4, .pf-c-title, .pf-c-card__title, .pf-c-modal-box__title {
+    font-family: 'Michroma', sans-serif !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important; 
+    color: var(--alien-acid) !important;
+    font-weight: 400 !important; 
+    text-shadow: 0 0 8px rgba(182, 255, 0, 0.6) !important;
+}
+
+/* ==========================================================================
+   4. LAYOUT COMPONENTS (SIDEBAR & HEADER)
+   ========================================================================== */
+/* Sidebar Container */
+.pf-c-page__sidebar {
+    background-color: #000000 !important;
+    border-right: 1px solid var(--alien-acid-dim) !important;
+}
+
+/* Navigation Links */
+.pf-c-nav__link {
+    color: var(--alien-acid-dim) !important;
+    font-family: 'Michroma', sans-serif !important;
+    letter-spacing: 1px !important;
+    border-radius: 0px !important;
+    transition: all 0.2s ease !important;
+}
+
+/* Active & Hover States */
+.pf-c-nav__link.pf-m-current, 
+.pf-c-nav__link:hover {
+    color: var(--alien-acid) !important;
+    background: rgba(182, 255, 0, 0.1) !important;
+    border-left: 3px solid var(--alien-acid) !important;
+    text-shadow: 0 0 8px var(--alien-acid) !important;
+}
+
+/* Section Titles (Admin Panel) */
+.pf-c-nav__section-title {
+    color: var(--alien-acid-dim) !important;
+    font-family: 'Quantico', sans-serif !important;
+    opacity: 0.8;
+}
+
+/* Top Header */
+.pf-c-page__header {
+    background-color: #080808 !important;
+    border-bottom: 1px solid var(--alien-acid-dim) !important;
+}
+
+/* Header Tools (Profile, Help, etc.) */
+.pf-c-page__header-tools .pf-c-button.pf-m-plain,
+.pf-c-page__header-tools .pf-c-dropdown__toggle {
+    color: var(--alien-acid) !important;
+    opacity: 0.8;
+}
+
+.pf-c-page__header-tools .pf-c-button.pf-m-plain:hover,
+.pf-c-page__header-tools .pf-c-dropdown__toggle:hover {
+    color: #fff !important;
+    background: var(--alien-acid-dim) !important;
+    opacity: 1;
+}
+
+/* ==========================================================================
+   5. ADMIN INTERFACE COMPATIBILITY
+   ========================================================================== */
+/* Explicit styling for the Admin Interface to apply the theme's colors 
+   without disrupting the complex layout or z-index stacking of admin modals.
+*/
+
+[data-ak-interface-root="ak-interface-admin"] .pf-c-card {
+    background: #0d0d0d !important;
+    border: 1px solid var(--alien-acid-dim) !important;
+    border-radius: 0px !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Data Tables */
+.pf-c-table {
+    background-color: transparent !important;
+    --pf-c-table--BackgroundColor: transparent !important;
+}
+
+.pf-c-table tr {
+    border-bottom: 1px solid var(--alien-acid-dim) !important;
+}
+
+.pf-c-table th {
+    color: var(--alien-acid) !important;
+    font-family: 'Michroma', sans-serif !important;
+    border-bottom: 2px solid var(--alien-acid) !important;
+}
+
+.pf-c-table td {
+    color: #ccc !important;
+}
+
+/* ==========================================================================
+   6. LOGIN INTERFACE (SCOPED)
+   ========================================================================== */
+.pf-c-login .pf-c-login__container {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    max-width: 600px !important;
+    margin: auto !important;
+    height: 100vh !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.pf-c-login .pf-c-login__main {
+    background-color: rgba(5, 5, 5, 0.92) !important;
+    border: 2px solid var(--alien-acid) !important;
+    border-radius: 0px !important;
+    padding: 20px 30px !important;
+    box-shadow: 0 0 20px rgba(182, 255, 0, 0.15), inset 0 0 30px rgba(0, 0, 0, 1) !important;
+    position: relative;
+}
+
+/* Decorative Terminal Labels */
+.pf-c-login__main::before {
+    content: "WEYLAND-YUTANI CORP";
+    position: absolute;
+    top: -18px; left: -2px;
+    background: var(--alien-acid);
+    color: #000;
+    font-size: 9px;
+    font-weight: bold;
+    padding: 2px 8px;
+    letter-spacing: 1px;
+    font-family: 'Quantico', sans-serif !important;
+    box-shadow: 0 0 5px var(--alien-acid);
+    text-shadow: none !important;
+}
+
+.pf-c-login__main::after {
+    content: "TERMINAL 426";
+    position: absolute;
+    bottom: -18px; right: -2px;
+    background: var(--alien-acid-dim);
+    color: #000;
+    font-size: 9px;
+    padding: 2px 8px;
+    font-family: 'Quantico', sans-serif !important;
+    text-shadow: none !important;
+}
+
+/* Logo Processing (Grayscale & Tint) */
+.pf-c-login__main-header.pf-c-brand img {
+    filter: grayscale(100%) sepia(100%) hue-rotate(50deg) saturate(500%) brightness(0.9); 
+}
+
+/* ==========================================================================
+   7. USER DASHBOARD & CARDS
+   ========================================================================== */
+/* Applies hover effects only to dashboard cards, safe for animations */
+:host(ak-library-impl) .pf-c-card,
+:host(ak-interface-user) .pf-c-card {
+    background: rgba(0, 0, 0, 0.8) !important;
+    border: 1px solid var(--alien-acid-dim) !important;
+    border-radius: 0px !important;
+    backdrop-filter: blur(5px) !important;
+}
+
+:host(ak-library-impl) .pf-c-card:hover {
+    border-color: var(--alien-acid) !important;
+    box-shadow: 0 0 15px rgba(182, 255, 0, 0.3) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* ==========================================================================
+   8. INPUTS & CONTROLS
+   ========================================================================== */
+.pf-c-form-control {
+    background-color: #000000 !important;
+    border: 1px solid var(--alien-acid-dim) !important;
+    border-radius: 0px !important;
+    color: var(--alien-acid) !important;
+    border-bottom: 2px solid var(--alien-acid-dim) !important;
+}
+
+.pf-c-form-control:focus {
+    border-color: var(--alien-acid) !important;
+    box-shadow: 0 0 8px rgba(182, 255, 0, 0.4) !important;
+}
+
+/* ==========================================================================
+   9. BUTTON STYLES
+   ========================================================================== */
+/* Standard Primary Actions */
+:host(ak-stage-identification) .pf-c-button.pf-m-primary,
+:host(ak-stage-password) .pf-c-button.pf-m-primary,
+:host(ak-library-impl) .pf-c-button,
+.pf-c-login button[type="submit"] {
+    background: transparent !important;
+    border: 2px solid var(--alien-acid) !important;
+    color: var(--alien-acid) !important;
+    border-radius: 0px !important;
+    text-transform: uppercase !important;
+    font-weight: bold !important;
+    letter-spacing: 1.5px !important;
+    padding: 10px 24px !important; 
+    box-shadow: 0 0 5px rgba(182, 255, 0, 0.2) !important;
+    font-family: 'Michroma', sans-serif !important;
+    transition: all 0.2s ease !important;
+}
+
+:host(ak-stage-identification) .pf-c-button.pf-m-primary:hover,
+:host(ak-stage-password) .pf-c-button.pf-m-primary:hover,
+:host(ak-library-impl) .pf-c-button:hover,
+.pf-c-login button[type="submit"]:hover {
+    background: var(--alien-acid) !important;
+    color: black !important;
+    box-shadow: 0 0 20px var(--alien-acid) !important;
+    text-shadow: none !important;
+}
+
+/* Red Alert Actions (Cancel/Delete) - Hover State */
+:host(ak-stage-user-login) .pf-c-button.pf-m-secondary:hover,
+:host(ak-stage-identification) .pf-c-button.pf-m-secondary:hover,
+.pf-c-button.pf-m-danger:hover,
+.pf-c-button.pf-m-secondary:hover {
+    border-color: var(--alien-alert) !important;
+    color: var(--alien-alert) !important;
+    background: rgba(255, 51, 0, 0.1) !important;
+    box-shadow: 0 0 15px var(--alien-alert) !important;
+    text-shadow: 0 0 5px var(--alien-alert) !important;
+}
+
+/* ==========================================================================
+   10. COMMUNICATIONS & ALERTS
+   ========================================================================== */
+/* High contrast styling for Info, Warning, and Error boxes */
+ak-alert, 
+.pf-c-alert {
+    --pf-c-alert--BackgroundColor: #0a0a0a !important;
+    --pf-c-alert--m-info--icon--Color: var(--alien-acid) !important;
+    --pf-c-alert__title--Color: var(--alien-acid) !important;
+    --pf-c-alert__description--Color: #cccccc !important;
+    --pf-c-alert--BorderTopColor: var(--alien-acid) !important;
+    
+    background-color: #0a0a0a !important;
+    color: #cccccc !important;
+    border: 1px solid var(--alien-acid-dim) !important;
+    border-top: 3px solid var(--alien-acid) !important;
+    box-shadow: 0 0 10px rgba(182, 255, 0, 0.1) !important;
+}
+
+.pf-c-alert__icon { color: var(--alien-acid) !important; }
+.pf-c-alert__title { color: var(--alien-acid) !important; font-weight: bold; text-shadow: none !important; }
+
+/* Inline Links within Alerts */
+ak-alert a, .pf-c-alert a {
+    color: #ffffff !important;
+    text-decoration: underline !important;
+    font-weight: bold !important;
+}
+ak-alert a:hover, .pf-c-alert a:hover {
+    color: var(--alien-acid) !important;
+    text-shadow: 0 0 5px var(--alien-acid) !important;
+}
+
+/* ==========================================================================
+   11. UTILITY COMPONENTS
+   ========================================================================== */
+/* Modals */
+.pf-c-backdrop {
+    background-color: rgba(0, 0, 0, 0.85) !important;
+    backdrop-filter: blur(2px) !important;
+}
+
+.pf-c-modal-box {
+    background-color: #0a0a0a !important;
+    border: 2px solid var(--alien-acid) !important;
+    box-shadow: 0 0 50px rgba(0,0,0,1) !important;
+    border-radius: 0px !important;
+}
+
+.pf-c-modal-box__title {
+    border-bottom: 1px solid var(--alien-acid-dim);
+    padding-bottom: 15px !important;
+    margin-bottom: 15px !important;
+}
+
+.pf-c-modal-box .pf-c-button.pf-m-primary {
+    background-color: var(--alien-acid-dim) !important;
+    color: white !important;
+    border-radius: 0px !important;
+}
+
+.pf-c-modal-box .pf-c-button.pf-m-link {
+    color: var(--alien-acid) !important;
+}
+
+/* Dropdown Menus */
+.pf-c-dropdown__menu {
+    background-color: #050505 !important;
+    border: 1px solid var(--alien-acid) !important;
+    border-radius: 0px !important;
+    box-shadow: 0 0 15px rgba(0,0,0,0.8) !important;
+}
+
+.pf-c-dropdown__menu-item {
+    color: var(--alien-acid) !important;
+}
+
+.pf-c-dropdown__menu-item:hover {
+    background-color: var(--alien-acid) !important;
+    color: black !important;
+    text-shadow: none !important;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar { width: 10px; background: #000; }
+::-webkit-scrollbar-thumb { background: var(--alien-acid-dim); border: 1px solid #000; }
+::-webkit-scrollbar-thumb:hover { background: var(--alien-acid); }
