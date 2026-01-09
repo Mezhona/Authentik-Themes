@@ -1,8 +1,6 @@
 # Authentik Custom Themes: 
 USCSS NOSTROMO (LV-426)
 
-A high-fidelity retro sci-fi theme for [authentik](https://goauthentik.io), designed to transform your instance into a 1979 industrial computer terminal.
-
 **Version:** 0.1  
 **Author:** Mezhona  
 **Aesthetic:** Cool-Retro-Term / Weyland-Yutani Industrial
