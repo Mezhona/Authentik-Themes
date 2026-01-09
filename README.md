@@ -9,7 +9,7 @@ USCSS NOSTROMO (LV-426)
 
 ## 🌌 Features
 
-* **CRT Simulation:** Advanced CSS overlays providing realistic scanlines, vignette edges, and subtle signal flicker.
+* **CRT Simulation:** CSS overlays providing  scanlines, vignette edges, and subtle signal flicker.
 * **Phosphor Typography:** Integrated Google Fonts featuring `Michroma` for cinematic headers and `Quantico` for technical data.
 * **Layering Isolation:** Re-engineered CSS architecture ensures visual overrides apply to the User Dashboard and Login flows without breaking the Administrative Interface or Modal layering.
 * **Red Alert System:** Reactive "Danger States" for critical actions (Delete, Cancel, Reset) featuring high-contrast red phosphor glows on hover.
