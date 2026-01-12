@@ -1,5 +1,6 @@
 # Authentik Custom Themes: 
-REDMOND 95 (FINAL CLEAN)
+**REDMOND 95**
+<img width="2498" height="1279" alt="image" src="https://github.com/user-attachments/assets/f18b0cbc-425e-460e-ab0a-e406194a4afa" />
 
 **Version:** 1.0  
 **Author:** Mezhona  
@@ -17,7 +18,8 @@ REDMOND 95 (FINAL CLEAN)
 
 ---
 
-USCSS NOSTROMO (LV-426)
+**USCSS NOSTROMO (LV-426)**
+<img width="2501" height="1277" alt="image" src="https://github.com/user-attachments/assets/72cbf6a4-d12b-4491-9724-8ffa04df5451" />
 
 **Version:** 1.0  
 **Author:** Mezhona  
