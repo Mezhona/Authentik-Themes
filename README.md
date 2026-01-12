@@ -19,7 +19,7 @@ REDMOND 95 (FINAL CLEAN)
 
 USCSS NOSTROMO (LV-426)
 
-**Version:** 1.0 
+**Version:** 1.0  
 **Author:** Mezhona  
 **Aesthetic:** Cool-Retro-Term / Weyland-Yutani Industrial
 
