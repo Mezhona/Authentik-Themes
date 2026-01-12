@@ -1,7 +1,25 @@
 # Authentik Custom Themes: 
+REDMOND 95 (FINAL CLEAN)
+
+**Version:** 1.0  
+**Author:** Mezhona  
+**Aesthetic:** Classic Win32 / Windows 95 Desktop
+
+---
+
+## 💾 Features
+
+* **3D GDI Rendering:** Precise light/dark border logic recreating the classic raised and sunken 3D bevels of the 90s.
+* **Desktop Simulation:** Replaces modern backgrounds with the iconic `#008080` (Teal) workspace background.
+* **Smart Flex Grid:** Re-engineered CSS architecture for expansion rows (Outposts, Policies) that maintains side-by-side 50/50 layouts while remaining responsive.
+* **Shadow DOM Integration:** Deep-part targeting for Authentik web components to ensure consistent silver-and-white styling across all internal widgets.
+* **Application Header Fix:** Custom styling for the User Dashboard header and search bar for a unified "Explorer" look.
+
+---
+
 USCSS NOSTROMO (LV-426)
 
-**Version:** 0.1  
+**Version:** 1.0 
 **Author:** Mezhona  
 **Aesthetic:** Cool-Retro-Term / Weyland-Yutani Industrial
 
@@ -9,7 +27,7 @@ USCSS NOSTROMO (LV-426)
 
 ## 🌌 Features
 
-* **CRT Simulation:** CSS overlays providing  scanlines, vignette edges, and subtle signal flicker.
+* **CRT Simulation:** CSS overlays providing scanlines, vignette edges, and subtle signal flicker.
 * **Phosphor Typography:** Integrated Google Fonts featuring `Michroma` for cinematic headers and `Quantico` for technical data.
 * **Layering Isolation:** Re-engineered CSS architecture ensures visual overrides apply to the User Dashboard and Login flows without breaking the Administrative Interface or Modal layering.
 * **Red Alert System:** Reactive "Danger States" for critical actions (Delete, Cancel, Reset) featuring high-contrast red phosphor glows on hover.
@@ -19,9 +37,9 @@ USCSS NOSTROMO (LV-426)
 
 ## 🛠️ Installation (Preferred Method)
 
-The most reliable way to apply this theme is via the **Custom CSS** field in the Authentik settings.
+The most reliable way to apply these themes is via the **Custom CSS** field in the Authentik settings.
 
-1.  Open the `USCSS-Nostromo-v0.1.css` file in this repository and **copy the entire contents**.
+1.  Open the desired `.css` file in this repository and **copy the entire contents**.
 2.  Navigate to your authentik instance and log in as an administrator.
 3.  Go to **System** -> **Settings**.
 4.  In the **Branding Settings** section, locate the **Custom CSS** field.
