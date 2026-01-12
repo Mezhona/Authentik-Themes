@@ -1,0 +1,1141 @@
+/* ==========================================================================
+   THEME: REDMOND 95 (FINAL CLEAN)
+   VERSION: 1.0
+   AUTHOR: Mezhona
+   DESCRIPTION: A high-fidelity Windows 95 / Win32 aesthetic for Authentik, 
+                reimagining modern components as classic 1990s desktop elements.
+   
+   FEATURES:
+   - 3D Bevel Logic: Precise light/dark border handling for depth.
+   - Desktop Simulation: Classic Teal (#008080) workspace background.
+   - Retro Typography: Support for MS Sans Serif and Tahoma styles.
+   - Single-Page Stability: Scoped styling for complex admin expansion rows.
+   - Reactive Components: "Pressed" button states and sunken input fields.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. CORE COLORS, GLOBALS & PALETTE OVERRIDES
+   ========================================================================== */
+:root {
+    /* -- CORE WIN95 PALETTE -- */
+    --win-bg: #008080;           /* Classic Desktop Teal */
+    --win-silver: #c0c0c0;       /* UI Face Color */
+    --win-white: #ffffff;       /* Highlight/Light Source */
+    --win-dark-grey: #808080;    /* Shadow Color */
+    --win-black: #000000;       /* Text & Deep Shadow */
+    --win-blue: #000080;        /* Active Title Bar Blue */
+    --win-highlight-blue: #1084d0;
+
+    /* -- PATTERNFLY GLOBAL OVERRIDES -- */
+    --pf-global--BackgroundColor--100: var(--win-silver);
+    --pf-global--BackgroundColor--200: var(--win-silver);
+    --pf-global--Color--100: var(--win-black);
+
+    /* -- PAGE COMPONENT BACKGROUNDS -- */
+    --pf-c-page__header--BackgroundColor: var(--win-silver);
+    --pf-c-page__sidebar--BackgroundColor: var(--win-silver);
+    --pf-c-page__header-brand--BackgroundColor: var(--win-silver);
+}
+
+/* Force Dark Mode Compatibility - Redirecting to Silver Palette */
+[data-theme="dark"] {
+    --pf-global--BackgroundColor--100: var(--win-silver);
+    --pf-global--BackgroundColor--200: var(--win-silver);
+    --pf-global--Color--100: var(--win-black);
+}
+
+/* ==========================================================================
+   2. LOGIN SCREEN (AUTHENTICATION FLOWS)
+   ========================================================================== */
+.pf-c-login {
+    background-color: var(--win-bg) !important;
+}
+
+.pf-c-login__main {
+    background-color: var(--win-silver) !important;
+    border: 2px solid var(--win-white) !important;
+    box-shadow: 1px 1px var(--win-black),
+                2px 2px var(--win-dark-grey) !important;
+    padding: 4px !important;
+}
+
+/* Simulated Title Bar Overlay */
+.pf-c-login__main::before {
+    content: "System Login";
+    display: block;
+    background: linear-gradient(90deg, var(--win-blue), #1084d0);
+    color: white;
+    padding: 3px 6px;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* ==========================================================================
+   3. SYSTEM HEADER & TOP NAVIGATION BAR
+   ========================================================================== */
+.pf-c-page,
+.pf-c-page__header,
+.pf-c-page__header::before,
+.pf-c-page__header-tools,
+.pf-c-page__header-row {   
+    background-color: var(--win-silver) !important;
+    background-image: none !important; 
+    color: var(--win-black) !important;
+}
+
+.pf-c-page__header {
+    /* Light source beveling (White Top, Dark Bottom) */
+    border-top: 2px solid var(--win-white) !important;
+    border-bottom: 2px solid var(--win-dark-grey) !important;
+    box-shadow: none !important;
+}
+
+.pf-c-page__header svg {
+    fill: currentColor !important;
+}
+
+.pf-c-page__header .pf-c-brand {
+    filter: brightness(0) !important;
+}
+
+.pf-c-page__header-tools .pf-c-button,
+.pf-c-page__header-tools .pf-c-dropdown__toggle {
+    background-color: var(--win-silver) !important;
+    color: var(--win-black) !important;
+}
+
+/* Hard-lock on Banner backgrounds for consistency */
+.pf-c-page__header,
+.main-content[role="banner"] {
+    background-color: var(--win-silver) !important;
+}
+
+/* ==========================================================================
+   4. BRANDING & LOGO AREA
+   ========================================================================== */
+.main-content[role="banner"] .brand,
+.main-content[role="banner"] .logo {
+    background-color: var(--win-silver) !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.main-content[role="banner"] .logo::before,
+.main-content[role="banner"] .logo::after {
+    background: none !important;
+}
+
+.main-content[role="banner"] .logo img,
+.main-content[role="banner"] .logo svg {
+    background: transparent !important;
+    filter: none !important;
+}
+
+.main-content[role="banner"] svg,
+.main-content[role="banner"] i {
+    fill: currentColor !important;
+    color: var(--win-black) !important;
+}
+
+/* ==========================================================================
+   5. SIDEBAR NAVIGATION & MENU STATES
+   ========================================================================== */
+.pf-c-page__sidebar,
+.pf-c-page__main-nav,
+.pf-c-nav,
+.pf-c-nav__list {
+    background-color: var(--win-silver) !important;
+    color: var(--win-black) !important;
+}
+
+.pf-c-page__sidebar {
+    /* Structural Bevel: Edge separation from header */
+    border-right: 2px solid var(--win-black) !important;
+    border-top: 2px solid var(--win-white) !important;
+    box-shadow: 
+        inset 1px 1px var(--win-white),
+        inset -1px -1px var(--win-dark-grey);
+}
+
+.pf-c-nav__link,
+.pf-c-nav__section-title {
+    color: var(--win-black) !important;
+}
+
+.pf-c-nav svg {
+    fill: currentColor !important;
+}
+
+/* Active Selection Glow (Classic OS Blue) */
+.pf-c-nav__link.pf-m-current {
+    background-color: var(--win-blue) !important;
+    color: var(--win-white) !important;
+}
+
+.pf-c-nav__link:hover {
+    background-color: var(--win-blue) !important;
+    color: var(--win-white) !important;
+    text-decoration: none !important;
+}
+
+.pf-c-nav__section {
+    border-bottom: 1px solid var(--win-dark-grey) !important;
+}
+
+/* Sub-menu Indentation Configuration */
+.pf-c-nav__subnav .pf-c-nav__link {
+    padding-left: 32px !important;
+}
+
+/* Current Item Outline Focus */
+.pf-c-nav__link.pf-m-current, 
+.pf-c-nav__link.pf-m-current:hover {
+    background-color: var(--win-blue) !important;
+    color: var(--win-white) !important;
+    font-weight: bold !important;
+    outline: 1px dotted var(--win-white) !important;
+    outline-offset: -4px;
+}
+
+.pf-c-nav__section-title {
+    color: var(--win-black) !important;
+    background-color: var(--win-silver) !important;
+    padding-left: 16px !important;
+}
+
+/* ==========================================================================
+   6. MAIN DESKTOP AREA & SIDEBAR GUTTERS
+   ========================================================================== */
+.pf-c-page__main,
+.pf-c-page__main-section,
+.pf-c-page__main .pf-c-sidebar__content {
+    background-color: var(--win-bg) !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.pf-c-sidebar.pf-m-gutter {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* ==========================================================================
+   7. UI WINDOWS (CARDS & PANELS)
+   ========================================================================== */
+.pf-c-card {
+    background-color: var(--win-silver) !important;
+    color: var(--win-black) !important;
+    
+    /* Global 3D Window Border Logic */
+    border-top: 2px solid var(--win-white) !important;
+    border-left: 2px solid var(--win-white) !important;
+    border-right: 2px solid var(--win-black) !important;
+    border-bottom: 2px solid var(--win-black) !important;
+    
+    /* High-fidelity Inner Bevel */
+    box-shadow: 
+        inset 1px 1px #dfdfdf,
+        inset -1px -1px var(--win-dark-grey) !important;
+    border-radius: 0 !important;
+}
+
+.pf-c-card__header,
+.pf-c-card__body,
+.pf-c-card__footer {
+    background-color: var(--win-silver) !important;
+    border: none !important;
+}
+
+/* ==========================================================================
+   8. DATA TABLES, TOOLBARS & PAGINATION
+   ========================================================================== */
+.pf-c-table,
+.pf-c-toolbar,
+.pf-c-pagination {
+    background-color: var(--win-silver) !important;
+    color: var(--win-black) !important;
+    border: none !important;
+    box-shadow:
+        inset 1px 1px var(--win-white),
+        inset -1px -1px var(--win-dark-grey) !important;
+}
+
+.pf-c-toolbar__content,
+.pf-c-toolbar__group {
+    border: none !important;
+}
+
+.pf-c-table thead th {
+    background-color: var(--win-silver) !important;
+    border-bottom: 2px solid var(--win-dark-grey) !important;
+    color: var(--win-black) !important;
+}
+
+.pf-c-table td {
+    background-color: var(--win-silver) !important;
+    border: none !important;
+    color: var(--win-black) !important;
+}
+
+.pf-c-table tbody tr:hover {
+    background-color: #dcdcdc !important;
+}
+
+/* ==========================================================================
+   9. INTERACTIVE CONTROLS (BUTTONS & DIVIDERS)
+   ========================================================================== */
+.pf-c-button {
+    background-color: var(--win-silver) !important;
+    color: var(--win-black) !important;
+    border: 2px solid var(--win-white) !important;
+    border-right-color: var(--win-dark-grey) !important;
+    border-bottom-color: var(--win-dark-grey) !important;
+    box-shadow: 1px 1px var(--win-black) !important;
+    border-radius: 0 !important;
+}
+
+.pf-c-button:hover {
+    background-color: var(--win-dark-grey) !important;
+}
+
+/* Pseudo-3D Horizontal Rule */
+.pf-c-divider, hr {
+    border: none !important;
+    height: 2px;
+    background: linear-gradient(to bottom, var(--win-dark-grey), var(--win-white)) !important;
+}
+
+/* ==========================================================================
+   10. MODALS & SYSTEM BACKDROPS
+   ========================================================================== */
+.pf-c-backdrop {
+    z-index: 9998 !important;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: grayscale(100%); /* Retro 'Frozen' visual effect */
+}
+
+.pf-c-modal-box {
+    z-index: 9999 !important;
+    position: relative !important;
+}
+
+.pf-c-modal-box hr,
+.pf-c-modal-box .pf-c-divider,
+.pf-c-modal-box fieldset,
+.pf-c-modal-box input,
+.pf-c-modal-box select,
+.pf-c-modal-box textarea {
+    border-color: var(--win-dark-grey) !important;
+}
+
+.pf-c-modal-box__header {
+    position: relative !important;
+    background: linear-gradient(90deg, var(--win-blue), #1084d0) !important;
+    color: var(--win-white) !important;
+    padding: 6px 10px !important;
+    border-bottom: 2px solid var(--win-dark-grey) !important;
+}
+
+.pf-c-modal-box__header .pf-c-title {
+    color: var(--win-white) !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+}
+
+.pf-c-modal-box__body,
+.pf-c-modal-box__body fieldset,
+.pf-c-modal-box__body section,
+.pf-c-modal-box__body div {
+    background-color: var(--win-silver) !important;
+    color: var(--win-black) !important;
+}
+
+.pf-c-modal-box__footer {
+    background-color: var(--win-silver) !important;
+    border-top: 2px solid var(--win-dark-grey) !important;
+    padding: 8px !important;
+}
+
+/* Modal Title Bar Control Button (Simulated Close) */
+.pf-c-modal-box > .pf-c-button.pf-m-plain {
+    position: absolute !important;
+    top: 4px !important;
+    right: 4px !important;
+    z-index: 10;
+    width: 18px;
+    height: 18px;
+    padding: 0 !important;
+    background-color: var(--win-silver) !important;
+    color: var(--win-black) !important;
+    border: 2px solid var(--win-white) !important;
+    box-shadow: 1px 1px var(--win-black) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.pf-c-modal-box > .pf-c-button.pf-m-plain:hover {
+    background-color: var(--win-dark-grey) !important;
+}
+
+.pf-c-modal-box > .pf-c-button.pf-m-plain:active {
+    border-color: var(--win-dark-grey) var(--win-white) var(--win-white) var(--win-dark-grey) !important;
+    box-shadow: none !important;
+}
+
+.pf-c-modal-box > .pf-c-button.pf-m-plain i,
+.pf-c-modal-box > .pf-c-button.pf-m-plain svg {
+    font-size: 12px;
+    line-height: 1 !important;
+    color: currentColor !important;
+}
+
+/* ==========================================================================
+   11. DATA INPUT FIELDS (SUNKEN 3D STYLE)
+   ========================================================================== */
+.pf-c-form-control,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select,
+textarea {
+    background-color: var(--win-white) !important;
+    color: var(--win-black) !important;
+    border-radius: 0 !important;
+    /* Sunken 3D effect: Shadow Top/Left, Highlight Bottom/Right */
+    border-top: 2px solid var(--win-dark-grey) !important;
+    border-left: 2px solid var(--win-dark-grey) !important;
+    border-right: 2px solid var(--win-white) !important;
+    border-bottom: 2px solid var(--win-white) !important;
+    box-shadow: inset 1px 1px 0px var(--win-black) !important;
+}
+
+.pf-c-form-control:focus {
+    outline: none !important;
+    background-color: var(--win-white) !important;
+}
+
+/* ==========================================================================
+   12. NOTIFICATION DRAWER & PANEL
+   ========================================================================== */
+.pf-c-drawer__panel,
+.pf-c-drawer__body,
+.pf-c-notification-drawer {
+    background-color: var(--win-silver) !important;
+    color: var(--win-black) !important;
+}
+
+.pf-c-notification-drawer__header {
+    background: linear-gradient(90deg, var(--win-blue), var(--win-highlight-blue)) !important;
+    color: var(--win-white) !important;
+    border-bottom: 2px solid var(--win-dark-grey) !important;
+    padding: 6px 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+.pf-c-notification-drawer__header-title {
+    color: var(--win-white) !important;
+    font-weight: bold;
+    margin: 0 !important;
+}
+
+.pf-c-notification-drawer__header-action {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    margin-left: auto !important;
+}
+
+.pf-c-notification-drawer__header-action > div,
+.pf-c-notification-drawer__header-action-close {
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Utility Buttons within Drawer */
+.pf-c-notification-drawer__header-action .pf-c-button,
+.pf-c-notification-drawer__header-action-close .pf-c-button {
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background-color: var(--win-silver) !important;
+    border-top: 2px solid var(--win-white) !important;
+    border-left: 2px solid var(--win-white) !important;
+    border-right: 2px solid var(--win-black) !important;
+    border-bottom: 2px solid var(--win-black) !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.pf-c-notification-drawer__header-action .pf-c-button svg,
+.pf-c-notification-drawer__header-action .pf-c-button i,
+.pf-c-notification-drawer__header-action-close .pf-c-button svg {
+    fill: var(--win-black) !important;
+    color: var(--win-black) !important;
+    font-size: 12px !important;
+    line-height: 1 !important;
+}
+
+.pf-c-notification-drawer__header-action .pf-c-button:active,
+.pf-c-notification-drawer__header-action-close .pf-c-button:active {
+    border-top: 2px solid var(--win-black) !important;
+    border-left: 2px solid var(--win-black) !important;
+    border-right: 2px solid var(--win-white) !important;
+    border-bottom: 2px solid var(--win-white) !important;
+    transform: translate(1px, 1px);
+}
+
+.pf-c-notification-drawer__list-item {
+    background-color: var(--win-silver) !important;
+    border-bottom: 1px dotted var(--win-dark-grey) !important;
+}
+
+.pf-c-notification-drawer__list-item:hover {
+    background-color: var(--win-blue) !important;
+    color: var(--win-white) !important;
+}
+
+.pf-c-notification-drawer__list-item:hover * {
+    color: var(--win-white) !important;
+}
+
+.pf-c-empty-state__icon {
+    color: var(--win-dark-grey) !important;
+}
+
+/* ==========================================================================
+   13. GLOBAL TEXT COLOR NORMALIZATION (WIN32 COMPATIBILITY)
+   ========================================================================== */
+/* Ensures all text default to Black on Silver/White backgrounds */
+.pf-c-page__main,
+.pf-c-card,
+.pf-c-card__body,
+.pf-c-content,
+.pf-c-table,
+.pf-c-toolbar,
+.pf-c-empty-state,
+.pf-c-login__main {
+    color: var(--win-black) !important;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, div {
+    color: inherit;
+}
+
+.pf-c-empty-state__content .pf-c-title,
+.pf-c-empty-state__body {
+    color: var(--win-black) !important;
+}
+
+.pf-c-list, 
+.pf-c-list__item,
+.pf-c-description-list__term,
+.pf-c-description-list__description {
+    color: var(--win-black) !important;
+}
+
+/* Hyperlinks (Classic Blue Underline) */
+a, 
+.pf-c-button.pf-m-link,
+.pf-c-table a {
+    color: var(--win-blue) !important;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: var(--win-highlight-blue) !important;
+}
+
+text, .pf-c-chart text {
+    fill: var(--win-black) !important; 
+    color: var(--win-black) !important;
+}
+
+/* ==========================================================================
+   14. TABLE ACTION CONTROLS (ICONS & TOOLTIPS)
+   ========================================================================== */
+/* Flexible layout for action button groups within rows */
+.pf-c-table td[headers="actions"] > div,
+.pf-c-table td > div {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 4px !important;
+}
+
+/* Component wrapper spacing */
+.pf-c-table td ak-forms-modal,
+.pf-c-table td ak-action-button,
+.pf-c-table td ak-user-impersonate-form,
+.pf-c-table td ak-group-form,
+.pf-c-description-list__description ak-forms-modal {
+    display: inline-flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+}
+
+/* Action Button Style Configuration */
+.pf-c-table td .pf-c-button,
+.pf-c-description-list__description .pf-c-button {
+    width: auto !important;
+    height: auto !important;
+    min-width: 32px !important; 
+    min-height: 32px !important;
+    margin: 0 !important;
+    background-color: var(--win-silver) !important;
+    border-top: 2px solid var(--win-white) !important;
+    border-left: 2px solid var(--win-white) !important;
+    border-right: 2px solid var(--win-black) !important;
+    border-bottom: 2px solid var(--win-black) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important; 
+}
+
+.pf-c-table td .pf-c-button:active,
+.pf-c-description-list__description .pf-c-button:active {
+    border-top: 2px solid var(--win-black) !important;
+    border-left: 2px solid var(--win-black) !important;
+    border-right: 2px solid var(--win-white) !important;
+    border-bottom: 2px solid var(--win-white) !important;
+    transform: translate(1px, 1px);
+}
+
+/* Icon Injections for Table Actions */
+.pf-c-table td .pf-c-button.pf-m-secondary,
+.pf-c-table td .pf-c-button.pf-m-primary,
+.pf-c-table td .pf-c-button.pf-m-tertiary,
+.pf-c-table td .pf-c-button.pf-m-warning,
+.pf-c-description-list__description .pf-c-button {
+    font-size: 0 !important;
+    width: 32px !important;
+    height: 32px !important;
+    padding: 0 !important; 
+}
+
+.pf-c-table td .pf-c-button span,
+.pf-c-description-list__description .pf-c-button span {
+    display: none !important;
+}
+
+.pf-c-table td .pf-c-button::after,
+.pf-c-description-list__description .pf-c-button::after {
+    font-family: "Font Awesome 5 Free", "FontAwesome";
+    font-weight: 900;
+    font-size: 14px !important;
+    color: var(--win-black) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+}
+
+/* Specific Action Icon Mappings */
+.pf-c-table td .pf-c-button.pf-m-secondary::after,
+.pf-c-table td .pf-c-button.pf-m-primary::after,
+.pf-c-description-list__description .pf-c-button.pf-m-secondary::after {
+    content: "\f044"; /* Pencil/Edit */
+}
+
+.pf-c-table td .pf-c-button.pf-m-tertiary::after {
+    content: "\f21b"; /* Spy/Impersonate */
+}
+
+.pf-c-table td .pf-c-button.pf-m-warning::after,
+.pf-c-description-list__description .pf-c-button.pf-m-warning::after {
+    content: "\f05e"; /* Ban/Deactivate */
+}
+
+.pf-c-table td .pf-c-button i,
+.pf-c-table td .pf-c-button svg,
+.pf-c-description-list__description .pf-c-button i {
+    font-size: 14px !important;
+    color: var(--win-black) !important;
+    fill: var(--win-black) !important;
+    margin: 0 !important;
+    display: inline-block !important;
+}
+
+/* Tooltip Simulation (Yellow Background Style) */
+.pf-c-table td .pf-c-button:hover::before,
+.pf-c-description-list__description .pf-c-button:hover::before {
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffe1;
+    color: black;
+    border: 1px solid black;
+    font-size: 11px !important;
+    font-family: "MS Sans Serif", "Tahoma", sans-serif;
+    padding: 2px 4px;
+    white-space: nowrap;
+    z-index: 9999;
+    pointer-events: none;
+    box-shadow: 1px 1px 0px gray;
+    font-weight: normal !important;
+    line-height: normal !important;
+}
+
+.pf-c-table td .pf-c-button.pf-m-secondary:hover::before,
+.pf-c-table td .pf-c-button.pf-m-primary:hover::before,
+.pf-c-description-list__description .pf-c-button.pf-m-secondary:hover::before { content: "Edit"; }
+.pf-c-table td .pf-c-button.pf-m-tertiary:hover::before { content: "Impersonate User"; }
+.pf-c-table td .pf-c-button.pf-m-warning:hover::before,
+.pf-c-description-list__description .pf-c-button.pf-m-warning:hover::before { content: "Deactivate"; }
+
+/* ==========================================================================
+   15. GLOBAL TOOLTIPS
+   ========================================================================== */
+.pf-c-tooltip {
+    --pf-c-tooltip--MaxWidth: auto !important;
+    --pf-c-tooltip--BoxShadow: 1px 1px 0px gray !important;
+    opacity: 1 !important;
+}
+
+.pf-c-tooltip__content {
+    background-color: #ffffe1 !important;
+    color: black !important;
+    border: 1px solid black !important;
+    border-radius: 0 !important;
+    font-family: "MS Sans Serif", "Tahoma", sans-serif !important;
+    font-size: 11px !important;
+    padding: 2px 4px !important;
+    box-shadow: none !important;
+}
+
+.pf-c-tooltip__arrow {
+    display: none !important;
+}
+
+/* ==========================================================================
+   16. SHADOW DOM FIXES (AUTHENTIK WEB COMPONENTS)
+   ========================================================================== */
+ak-dual-select,
+ak-codemirror,
+ak-search-bar,
+ak-chip-group,
+ak-message-level,
+ak-expand,
+ak-outpost-health,
+ak-schedule-list,
+ak-task-list,
+ak-empty-state,
+ak-timestamp,
+ak-task-status,
+ak-label {
+    --pf-global--BackgroundColor--100: var(--win-white) !important;
+    --pf-global--BackgroundColor--200: var(--win-white) !important;
+    --pf-global--BackgroundColor--dark-100: var(--win-white) !important;
+    --pf-global--BackgroundColor--dark-200: var(--win-white) !important;
+    --pf-global--Color--100: var(--win-black) !important;
+    --pf-global--Color--200: var(--win-black) !important;
+    --pf-global--Color--dark-100: var(--win-black) !important;
+    
+    --pf-c-dual-list-selector--BackgroundColor: var(--win-white) !important;
+    --pf-c-dual-list-selector__header--BackgroundColor: var(--win-silver) !important;
+    --pf-c-dual-list-selector__item--BackgroundColor: var(--win-white) !important;
+    --pf-c-dual-list-selector__item--Color: var(--win-black) !important;
+    --pf-c-dual-list-selector__item-count--Color: var(--win-black) !important;
+    --pf-c-dual-list-selector__controls-item--BackgroundColor: var(--win-silver) !important;
+    
+    --pf-c-text-input-group__text-input--BackgroundColor: var(--win-white) !important;
+    --pf-c-text-input-group--BackgroundColor: var(--win-white) !important;
+    --pf-c-text-input-group__text--Color: var(--win-black) !important;
+
+    --pf-c-code-editor--BackgroundColor: var(--win-white) !important;
+    --pf-c-code-editor--Color: var(--win-black) !important;
+    --pf-c-code-editor__header--BackgroundColor: var(--win-silver) !important;
+    --pf-c-code-editor__header--BorderBottomColor: var(--win-dark-grey) !important;
+
+    --pf-c-table--BackgroundColor: var(--win-white) !important;
+    --pf-c-table__cell--Color: var(--win-black) !important;
+    
+    background-color: transparent !important;
+    color: var(--win-black) !important;
+}
+
+ak-codemirror {
+    --pf-global--Color--light-100: var(--win-black) !important;
+}
+
+ak-dual-select .pf-c-dual-list-selector__title-text {
+    color: var(--win-black) !important;
+}
+
+ak-search-bar {
+    border: 2px solid var(--win-dark-grey) !important;
+    border-right-color: var(--win-white) !important;
+    border-bottom-color: var(--win-white) !important;
+    background: var(--win-white) !important;
+}
+
+/* ==========================================================================
+   17. NESTED LIST & TABLE NORMALIZATION
+   ========================================================================== */
+ak-expand .pf-c-card__title,
+ak-expand .pf-c-card__body {
+    background-color: var(--win-silver) !important; 
+    color: var(--win-black) !important;
+}
+
+ak-expand code, 
+ak-expand pre {
+    display: block;
+    background-color: var(--win-white) !important;
+    color: var(--win-black) !important;
+    border: 2px solid var(--win-dark-grey) !important;
+    border-right-color: var(--win-white) !important;
+    border-bottom-color: var(--win-white) !important;
+    padding: 10px !important;
+    font-family: 'Courier New', monospace !important;
+    margin-top: 5px;
+}
+
+ak-expand .pf-c-expandable-section__toggle-text {
+    color: var(--win-black) !important;
+    font-weight: bold;
+}
+
+ak-expand .pf-c-expandable-section__toggle-icon {
+    color: var(--win-blue) !important; 
+}
+
+ak-task-list,
+ak-schedule-list,
+ak-outpost-health {
+    --pf-c-table__th--BackgroundColor: var(--win-silver) !important;
+    --pf-c-table__th--Color: var(--win-black) !important;
+    --pf-c-table__cell--Color: var(--win-black) !important;
+    --pf-c-table--BackgroundColor: var(--win-white) !important;
+    --pf-c-toolbar--BackgroundColor: var(--win-silver) !important;
+    --pf-c-table--BorderColor: var(--win-dark-grey) !important;
+}
+
+ak-empty-state {
+    --pf-c-empty-state--BackgroundColor: var(--win-white) !important;
+    --pf-c-empty-state__icon--Color: var(--win-black) !important;
+    --pf-c-title--m-lg--Color: var(--win-black) !important;
+    --pf-c-empty-state__primary--Color: var(--win-black) !important;
+    
+    display: block;
+    background: var(--win-white) !important;
+    border: 2px inset var(--win-white);
+    padding: 20px;
+    color: var(--win-black) !important;
+}
+
+ak-empty-state .pf-c-title,
+ak-empty-state h1 {
+    color: var(--win-black) !important;
+    font-weight: bold;
+}
+
+ak-empty-state .pf-c-empty-state__icon {
+    color: var(--win-black) !important;
+}
+
+ak-spinner-button {
+    --pf-c-button--m-secondary--Color: var(--win-black) !important;
+    --pf-c-button--m-secondary--BackgroundColor: var(--win-silver) !important;
+    color: var(--win-black) !important;
+}
+
+ak-label .pf-c-label.pf-m-green {
+    background-color: #008000 !important;
+    color: white !important;
+    border: 1px solid black !important;
+}
+
+ak-timestamp {
+    color: var(--win-black) !important;
+}
+
+/* Expansion Row Container Logic */
+.pf-c-table__expandable-row-content .pf-c-description-list,
+.pf-c-table__expandable-row-content .pf-c-description-list__group,
+.pf-c-table__expandable-row-content .pf-c-description-list__description {
+    display: block !important;
+    width: 100% !important;
+    grid-template-columns: 1fr !important;
+    max-width: none !important;
+    margin-bottom: 15px !important;
+}
+
+ak-schedule-list,
+ak-task-list,
+ak-outpost-health {
+    display: block !important;
+    width: 100% !important;
+    clear: both !important;
+    margin-top: 10px;
+    background-color: var(--win-silver) !important; 
+    padding: 8px;
+    border: 2px solid var(--win-white);      
+    border-right-color: var(--win-dark-grey);
+    border-bottom-color: var(--win-dark-grey);
+}
+
+ak-schedule-list, 
+ak-task-list {
+    overflow-x: auto !important;
+}
+
+.pf-c-description-list__term .pf-c-description-list__text {
+    font-weight: bold;
+    color: var(--win-black) !important;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+/* ==========================================================================
+   18. USER LIBRARY & CARD RENDERER (OUTLINE CONTROL)
+   ========================================================================== */
+.pf-c-card {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.pf-c-card__header.pf-m-pressable {
+    margin-top: auto !important; 
+    text-align: center !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+}
+
+.pf-c-card__header-actions {
+    align-self: flex-end !important;
+}
+
+/* Link Wrapper Reset */
+a.card-header-aspect-wrapper {
+    text-decoration: none !important;
+    color: inherit !important;
+    cursor: default !important;
+    box-shadow: none !important;
+    -webkit-text-stroke: 0 !important;
+    -webkit-text-stroke-width: 0 !important;
+}
+
+/* Application Title & Text Clarity */
+#app-title,
+.clamp-wrapper,
+[part="card-title"],
+.pf-c-card__title,
+.pf-c-card__title * { 
+    -webkit-text-stroke: 0 !important;
+    -webkit-text-stroke-width: 0 !important;
+    -webkit-text-stroke-color: transparent !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    color: #000000 !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    font-family: "MS Sans Serif", "Tahoma", sans-serif !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    transform: none !important;
+}
+
+/* Overflow/Clamp Management */
+.clamp-wrapper {
+    display: block !important;
+    width: 100% !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    -webkit-line-clamp: unset !important;
+    -webkit-box-orient: unset !important;
+}
+
+/* ==========================================================================
+   19. WIZARD COMPONENTS & LAYOUT STABILITY
+   ========================================================================== */
+/* Prevents wizard steps from collapsing during multi-stage configuration */
+ak-wizard-page-type-create,
+ak-wizard-page-form,
+.pf-c-wizard__main {
+    display: block !important;
+    height: auto !important;
+    min-height: 300px;
+    overflow-y: auto !important;
+}
+
+ak-wizard-page-type-create,
+ak-proxy-form {
+    width: 100% !important;
+    display: block !important;
+}
+
+.pf-c-radio {
+    margin-bottom: 8px !important;
+}
+
+/* ==========================================================================
+   20. SMART FLEX GRID (EXPANDABLE ROW OVERRIDES)
+   ========================================================================== */
+/* Root container for expansion content with flex-wrap support */
+.pf-c-table__expandable-row-content {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: flex-start !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    height: auto !important;
+    padding: 15px !important;
+    background-color: var(--win-silver) !important;
+    gap: 15px !important;
+}
+
+/* Core child element sizing (Force Top row) */
+.pf-c-table__expandable-row-content > * {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important; 
+    margin: 0 !important;
+    order: 1 !important;
+}
+
+/* Task List Logic: Smart Grow for Outpost/Notification views */
+.pf-c-table__expandable-row-content ak-task-list {
+    flex: 1 0 45% !important; 
+    width: auto !important;
+    max-width: 100% !important;
+    order: 2 !important;
+    display: block !important;
+    background-color: var(--win-silver) !important; 
+    border: 2px solid var(--win-white) !important;      
+    border-right-color: var(--win-dark-grey) !important;
+    border-bottom-color: var(--win-dark-grey) !important;
+    padding: 8px;
+}
+
+/* Policy List Logic: Side-by-side positioning */
+.pf-c-table__expandable-row-content ak-bound-policies-list {
+    flex: 1 0 45% !important;
+    width: auto !important;
+    max-width: 100% !important;
+    order: 3 !important;
+    display: block !important;
+    background: var(--win-silver) !important;
+    border: 2px inset var(--win-white) !important;
+    padding: 8px;
+}
+
+/* Shadow DOM Part Normalization */
+ak-bound-policies-list::part(table-container) {
+    border: none !important;
+    min-height: auto !important;
+    max-height: none !important;
+}
+
+/* ==========================================================================
+   21. SYSTEM EMPTY STATES & LOADING OVERLAYS
+   ========================================================================== */
+ak-loading-overlay,
+.pf-c-spinner,
+.pf-c-empty-state,
+.pf-m-full-height {
+    --pf-global--BackgroundColor--100: var(--win-silver) !important;
+    background-color: var(--win-silver) !important;
+}
+
+ak-empty-state, 
+.pf-c-empty-state__content {
+    background-color: var(--win-silver) !important;
+    color: var(--win-black) !important;
+    border: none !important;
+}
+
+.pf-c-empty-state__title,
+.pf-c-empty-state__body,
+.pf-c-empty-state__icon {
+    color: var(--win-black) !important;
+}
+
+.pf-c-table.pf-m-empty,
+.pf-c-toolbar.pf-m-empty {
+    background-color: var(--win-silver) !important;
+}
+
+ak-empty-state::part(base) {
+    background-color: var(--win-silver) !important;
+}
+
+/* ==========================================================================
+   22. APPLICATION DASHBOARD HEADER & SEARCH FIX
+   ========================================================================== */
+.pf-c-page__header.pf-c-content {
+    background-color: var(--win-silver) !important;
+    padding: 10px 20px !important;
+    margin-bottom: 15px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    border-top: 2px solid var(--win-white) !important;
+    border-left: 2px solid var(--win-white) !important;
+    border-right: 2px solid var(--win-black) !important;
+    border-bottom: 2px solid var(--win-black) !important;
+    box-shadow: inset 1px 1px var(--win-silver), 
+                inset -1px -1px var(--win-dark-grey) !important;
+}
+
+.pf-c-page__header.pf-c-content h1 {
+    color: var(--win-black) !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+    margin: 0 !important;
+}
+
+/* Classic Sunken Search Input */
+#application-search-input {
+    background-color: var(--win-white) !important;
+    color: var(--win-black) !important;
+    border-radius: 0 !important;
+    padding: 4px 8px !important;
+    font-family: "MS Sans Serif", "Tahoma", sans-serif !important;
+    border-top: 2px solid var(--win-dark-grey) !important;
+    border-left: 2px solid var(--win-dark-grey) !important;
+    border-right: 2px solid var(--win-white) !important;
+    border-bottom: 2px solid var(--win-white) !important;
+    box-shadow: inset 1px 1px 0px var(--win-black) !important;
+}
+
+/* ==========================================================================
+   23. COMPONENT-SPECIFIC LOADING NORMALIZATION
+   ========================================================================== */
+.pf-c-empty-state,
+ak-empty-state,
+.pf-c-empty-state__content {
+    background-color: var(--win-silver) !important;
+    color: var(--win-black) !important;
+}
+
+ak-empty-state::part(base),
+ak-loading-overlay::part(base) {
+    background-color: var(--win-silver) !important;
+}
+
+ak-loading-overlay {
+    --pf-global--BackgroundColor--100: var(--win-silver) !important;
+    background-color: var(--win-silver) !important;
+}
