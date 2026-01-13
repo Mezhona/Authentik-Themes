@@ -43,10 +43,11 @@ The most reliable way to apply these themes is via the **Custom CSS** field in t
 
 1.  Open the desired `.css` file in this repository and **copy the entire contents**.
 2.  Navigate to your authentik instance and log in as an administrator.
-3.  Go to **System** -> **Settings**.
-4.  In the **Branding Settings** section, locate the **Custom CSS** field.
-5.  Paste the code directly into the editor.
-6.  Click **Save Changes** at the bottom of the page.
+3.  Go to **System** -> **Brands**.
+4.  Click "Edit" on the brand you wish to add the new custom CSS to.
+5.  Expand "Branding Settings" and find "*Custom CSS*"
+6.  Paste the code directly into the editor.
+7.  Click **Update** at the bottom left of the page.
 
 ---
 
