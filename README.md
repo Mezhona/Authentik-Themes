@@ -53,7 +53,7 @@ The most reliable way to apply these themes is via the **Custom CSS** field in t
 
 ## 🖥️ Compatibility
 
-* **authentik:** Tested on version 2025.10.x and newer.
+* **authentik:** Tested on version 2025.10.2.
 * **Browsers:** Optimized for modern engines (Chrome, Firefox, Edge, Safari).
 * **Interface:** Fully compatible with both the User Interface and Admin Interface without interfering with modal pop-ups or navigation menus.
 
