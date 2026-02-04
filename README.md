@@ -30,8 +30,9 @@ This is a heavy "dark mode" theme inspired by the computers in *Alien*. It uses 
 * **Alerts:** "Danger" buttons (like delete) glow red so you don't miss them.
 
 ![Nostromo Preview](https://github.com/user-attachments/assets/72cbf6a4-d12b-4491-9724-8ffa04df5451)
+<img width="2400" height="1029" alt="image" src="https://github.com/user-attachments/assets/8ac09200-547a-4495-93b2-208df9ebc2b3" />
 
-![Nostromo Detail](https://github.com/user-attachments/assets/05a9a02f-1c2f-4c63-acc9-e1dce4edab2f)
+![Nostromo Detail](
 (Note: if you dont like the application groupings here, just dont add the last part (12. Dashboard Layout))
 
 ---
