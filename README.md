@@ -1,70 +1,58 @@
-# Authentik Custom Themes: 
-**REDMOND 95**
-<img width="2498" height="1279" alt="image" src="https://github.com/user-attachments/assets/f18b0cbc-425e-460e-ab0a-e406194a4afa" />
+# My Custom Authentik Themes
 
-**Version:** 1.0  
-**Author:** Mezhona  
-**Aesthetic:** Classic Win32 / Windows 95 Desktop
+I wasn't a huge fan of the default Authentik look, so I messed around with some CSS to make these themes. One is for a retro Windows 95 vibe, and the other is a sci-fi terminal look (Alien/Nostromo style).
 
----
+They are just CSS files, so they are easy to install and won't break your actual authentication logic.
 
-## 💾 Features
+## The Themes
 
-* **3D GDI Rendering:** Precise light/dark border logic recreating the classic raised and sunken 3D bevels of the 90s.
-* **Desktop Simulation:** Replaces modern backgrounds with the iconic `#008080` (Teal) workspace background.
-* **Smart Flex Grid:** Re-engineered CSS architecture for expansion rows (Outposts, Policies) that maintains side-by-side 50/50 layouts while remaining responsive.
-* **Shadow DOM Integration:** Deep-part targeting for Authentik web components to ensure consistent silver-and-white styling across all internal widgets.
-* **Application Header Fix:** Custom styling for the User Dashboard header and search bar for a unified "Explorer" look.
+### 1. Redmond 95
+**Style:** Windows 95 / Classic Win32
 
----
+This basically turns your dashboard into a Windows 95 desktop. I spent a lot of time getting the "3D" borders right (the raised and sunken gray edges) so it actually feels like the old OS.
 
-**USCSS NOSTROMO (LV-426)**
-<img width="2501" height="1277" alt="image" src="https://github.com/user-attachments/assets/72cbf6a4-d12b-4491-9724-8ffa04df5451" />
+* **Classic Colors:** Uses the specific Teal background and Silver grays from the 90s.
+* **The Look:** Buttons, input fields, and cards all look like Windows controls.
+* **Layout:** It fixes some of the spacing issues in the default layout so things sit side-by-side better.
 
-**Version:** 1.0  
-**Author:** Mezhona  
-**Aesthetic:** Cool-Retro-Term / Weyland-Yutani Industrial
+![Redmond 95 Preview](https://github.com/user-attachments/assets/f18b0cbc-425e-460e-ab0a-e406194a4afa)
 
 ---
 
-## 🌌 Features
+### 2. USCSS Nostromo (LV-426)
+**Style:** Alien / Retro Terminal / Weyland-Yutani
 
-* **CRT Simulation:** CSS overlays providing scanlines, vignette edges, and subtle signal flicker.
-* **Phosphor Typography:** Integrated Google Fonts featuring `Michroma` for cinematic headers and `Quantico` for technical data.
-* **Layering Isolation:** Re-engineered CSS architecture ensures visual overrides apply to the User Dashboard and Login flows without breaking the Administrative Interface or Modal layering.
-* **Red Alert System:** Reactive "Danger States" for critical actions (Delete, Cancel, Reset) featuring high-contrast red phosphor glows on hover.
-* **Communication Clarity:** Custom-tuned alert blocks that fix visibility issues with default information boxes, ensuring all system messages remain legible.
+This is a heavy "dark mode" theme inspired by the computers in *Alien*. It uses glowing green text, scanlines, and a few visual tricks to make it look like an old CRT monitor.
+
+* **CRT Effects:** It has a slight flicker and scanlines overlay to give it that retro screen feel.
+* **Fonts:** Uses `Michroma` and `Quantico` fonts to match the movie aesthetic.
+* **Group Boxes:** I changed how the application groups look—now they are distinct boxes with the "Weyland-Yutani" style labels on top.
+* **Alerts:** "Danger" buttons (like delete) glow red so you don't miss them.
+
+![Nostromo Preview](https://github.com/user-attachments/assets/72cbf6a4-d12b-4491-9724-8ffa04df5451)
+
+![Nostromo Detail](https://github.com/user-attachments/assets/05a9a02f-1c2f-4c63-acc9-e1dce4edab2f)
+(Note: if you dont like the application groupings here, just dont add the last part (12. Dashboard Layout))
 
 ---
 
-## 🛠️ Installation (Preferred Method)
+## How to Install
 
-The most reliable way to apply these themes is via the **Custom CSS** field in the Authentik settings.
+You don't need to mess with docker volumes or host files. You can just paste this right into the settings.
 
-1.  Open the desired `.css` file in this repository and **copy the entire contents**.
-2.  Navigate to your authentik instance and log in as an administrator.
+1.  Open the `.css` file for the theme you want and copy everything.
+2.  Log in to Authentik as an Admin.
 3.  Go to **System** -> **Brands**.
-4.  Click "Edit" on the brand you wish to add the new custom CSS to.
-5.  Expand "Branding Settings" and find "*Custom CSS*"
-6.  Paste the code directly into the editor.
-7.  Click **Update** at the bottom left of the page.
+4.  Edit your brand.
+5.  Scroll down to **Branding Settings**, find the **Custom CSS** box, and paste the code there.
+6.  Hit **Update**.
 
----
+*Note: You might need to force refresh (Ctrl+F5) to see the font changes properly.*
 
-## 🖥️ Compatibility
+## Compatibility
 
-* **authentik:** Tested on version 2025.10.2.
-* **Browsers:** Optimized for modern engines (Chrome, Firefox, Edge, Safari).
-* **Interface:** Fully compatible with both the User Interface and Admin Interface without interfering with modal pop-ups or navigation menus.
+I'm running this on **Authentik 2025.10.2** and it works fine on Chrome and Firefox. Since it's just CSS, it should be pretty safe to use, but obviously, things might look different if the Authentik team changes their layout in the future.
 
----
+## License
 
-## 📜 License
-
-This project is released into the public domain under **The Unlicense**. 
-
-I want this to be as open as possible: you are free to use, modify, fork, and distribute these styles however you see fit for personal or commercial projects. There are no restrictions.
-
----
-
-*Note: This is a community-contributed theme and is not an official product of the authentik project.*
+Do whatever you want with this! It's public domain. Feel free to fork it, change the colors, or use it however you like.
