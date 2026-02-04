@@ -433,84 +433,79 @@ ak-alert a:hover, .pf-c-alert a:hover {
 ::-webkit-scrollbar-thumb:hover { background: var(--alien-acid); }
 
 /* ==========================================================================
-   12. DASHBOARD LAYOUT: "WEYLAND FRAME" (Dynamic Tabs)
+   12. DASHBOARD LAYOUT: WEYLAND COMPACT (Reverted & Downsized)
    ========================================================================== */
 
-/* 1. MAIN GRID CONTAINER */
-[part="app-list"] {
+/* 1. MAIN GRID CONTAINER (Scoped) */
+:host(ak-library-impl) [part="app-list"] {
     display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)) !important;
-    gap: 40px 20px !important; /* Extra vertical gap (40px) to make room for the tabs */
+    /* Reduced min-width to 380px to allow tighter packing of groups */
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)) !important;
+    gap: 40px 15px !important; 
     padding: 30px 0 !important;
     align-items: start !important;
+    justify-content: center !important;
 }
 
-/* 2. THE GROUP BOX (The Frame) */
-[part="app-group"] {
-    /* The Green Border Frame */
+/* 2. THE GROUP BOX */
+:host(ak-library-impl) [part="app-group"] {
     border: 2px solid var(--alien-acid) !important;
     background: rgba(0, 0, 0, 0.25) !important;
-    
-    /* Layout positioning */
-    position: relative !important; /* Critical for placing tabs */
-    overflow: visible !important;  /* Allows tabs to hang outside the box */
+    position: relative !important;
+    overflow: visible !important;
     margin: 0 !important;
+    padding: 25px 8px 8px 8px !important;
     
-    /* Internal spacing for the apps */
-    padding: 25px 15px 15px 15px !important; /* Top padding pushes apps down away from the tab */
+    max-width: 450px !important; /* Cap the group width */
+    width: 100% !important;
+    justify-self: center !important; 
     
-    /* Grid for the Apps inside */
     display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)) !important;
-    gap: 10px !important;
+    /* CHANGE: Fixed columns instead of flexible fractions. 
+       This forces cards to be exactly 48% width, preventing huge stretching. */
+    grid-template-columns: 49% 49% !important; 
+    justify-content: space-between !important;
+    gap: 0 !important; /* Gap handled by space-between */
+    row-gap: 6px !important;
 }
 
-/* 3. TOP-LEFT TAB (The Group Name) 
-   We style the legend/header to look like the solid "Weyland-Yutani" chip */
-[part="app-group-header"] {
+/* 3. TOP-LEFT TAB */
+:host(ak-library-impl) [part="app-group-header"] {
     position: absolute !important;
-    top: -14px !important; /* Move it UP to sit on the border line */
-    left: -2px !important; /* Align with left border edge */
-    
-    /* Sizing */
+    top: -14px !important;
+    left: -2px !important;
     display: inline-block !important;
     width: auto !important;
     height: auto !important;
-    
-    /* "Chip" Styling */
-    background-color: var(--alien-acid) !important; /* Solid Green */
+    background-color: var(--alien-acid) !important;
     padding: 2px 12px !important;
     border: none !important;
-    box-shadow: 0 0 10px var(--alien-acid) !important; /* The Glow */
+    box-shadow: 0 0 10px var(--alien-acid) !important;
     z-index: 10;
 }
 
 /* 4. TEXT INSIDE TOP TAB */
-[part="app-group-header"] h2 {
-    color: #000000 !important; /* Black Text */
+:host(ak-library-impl) [part="app-group-header"] h2 {
+    color: #000000 !important;
     font-family: 'Quantico', sans-serif !important;
-    font-weight: 700 !important; /* Bold */
+    font-weight: 700 !important;
     font-size: 0.85rem !important;
     letter-spacing: 1px !important;
     text-transform: uppercase !important;
-    text-shadow: none !important; /* Remove text glow so it's readable on green */
+    text-shadow: none !important;
     margin: 0 !important;
     padding: 0 !important;
     line-height: 1.2 !important;
 }
 
-/* 5. BOTTOM-RIGHT TAB (The Technical Data)
-   This reads the 'data-app-count' attribute from the HTML and prints it! */
-[part="app-group"]::after {
-    content: "SYS_COUNT: " attr(data-app-count); /* Example: "SYS_COUNT: 7" */
-    
+/* 5. BOTTOM-RIGHT TAB */
+:host(ak-library-impl) [part="app-group"]::after {
+    content: "SYS_COUNT: " attr(data-app-count);
     position: absolute;
-    bottom: -11px; /* Hang off the bottom */
-    right: -2px;   /* Align right */
-    
-    background-color: var(--alien-acid-dim); /* Darker Green/Amber for secondary info */
+    bottom: -11px;
+    right: -2px;
+    background-color: var(--alien-acid-dim);
     color: #000;
-    
     font-family: 'Quantico', monospace;
     font-size: 0.7rem;
     font-weight: bold;
@@ -518,49 +513,55 @@ ak-alert a:hover, .pf-c-alert a:hover {
     pointer-events: none;
 }
 
-/* 6. APP CARDS (Standard Compact Style) */
-[part="card"] {
-    min-height: 50px !important;
+/* 6. APP CARD (Downsized) 
+   - Reverted border to visible green (alien-acid-dim).
+   - Reduced min-height to 40px (Very compact). */
+:host(ak-library-impl) [part="card"] {
+    min-height: 40px !important;
+    height: 100% !important;
     background: rgba(0, 0, 0, 0.6) !important;
-    border: 1px solid var(--alien-acid-dim) !important;
+    border: 1px solid var(--alien-acid-dim) !important; /* Reverted to visible border */
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
-    padding: 5px 10px !important;
+    padding: 3px 6px !important; 
 }
 
-/* 7. ICONS (Green Filter) */
-[part="card-header-icon"] img, 
-[part="card-header-icon"] svg,
-[part="icon insignia"] {
-    height: 28px !important; 
-    width: 28px !important;
+/* 7. ICONS (Small) */
+:host(ak-library-impl) [part="card-header-icon"] img, 
+:host(ak-library-impl) [part="card-header-icon"] svg,
+:host(ak-library-impl) [part="icon insignia"] {
+    height: 20px !important;
+    width: 20px !important;
     filter: grayscale(100%) sepia(100%) hue-rotate(60deg) saturate(600%) brightness(0.8) !important;
     opacity: 0.8 !important;
     transition: all 0.2s ease !important;
+    object-fit: contain !important;
 }
 
 /* 8. APP TEXT */
-[part="card-title"] {
-    font-size: 0.8rem !important;
+:host(ak-library-impl) [part="card-title"] {
+    font-size: 0.7rem !important;
     color: var(--alien-acid) !important;
     text-transform: uppercase;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    margin-left: 8px !important;
+    margin-left: 8px !important; 
+    flex-grow: 1 !important;
 }
 
 /* --- HOVER EFFECTS --- */
-[part="card"]:hover {
+:host(ak-library-impl) [part="card"]:hover {
     border-color: var(--alien-acid) !important;
     background: rgba(182, 255, 0, 0.1) !important;
     transform: translateY(-1px);
 }
 
-[part="card"]:hover [part="card-header-icon"] img,
-[part="card"]:hover [part="card-header-icon"] svg,
-[part="card"]:hover [part="icon insignia"] {
+:host(ak-library-impl) [part="card"]:hover [part="card-header-icon"] img,
+:host(ak-library-impl) [part="card"]:hover [part="card-header-icon"] svg,
+:host(ak-library-impl) [part="card"]:hover [part="icon insignia"] {
     filter: none !important;
     opacity: 1 !important;
+    transform: scale(1.1);
 }
