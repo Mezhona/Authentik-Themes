@@ -431,3 +431,136 @@ ak-alert a:hover, .pf-c-alert a:hover {
 ::-webkit-scrollbar { width: 10px; background: #000; }
 ::-webkit-scrollbar-thumb { background: var(--alien-acid-dim); border: 1px solid #000; }
 ::-webkit-scrollbar-thumb:hover { background: var(--alien-acid); }
+
+/* ==========================================================================
+   12. DASHBOARD LAYOUT: "WEYLAND FRAME" (Dynamic Tabs)
+   ========================================================================== */
+
+/* 1. MAIN GRID CONTAINER */
+[part="app-list"] {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)) !important;
+    gap: 40px 20px !important; /* Extra vertical gap (40px) to make room for the tabs */
+    padding: 30px 0 !important;
+    align-items: start !important;
+}
+
+/* 2. THE GROUP BOX (The Frame) */
+[part="app-group"] {
+    /* The Green Border Frame */
+    border: 2px solid var(--alien-acid) !important;
+    background: rgba(0, 0, 0, 0.25) !important;
+    
+    /* Layout positioning */
+    position: relative !important; /* Critical for placing tabs */
+    overflow: visible !important;  /* Allows tabs to hang outside the box */
+    margin: 0 !important;
+    
+    /* Internal spacing for the apps */
+    padding: 25px 15px 15px 15px !important; /* Top padding pushes apps down away from the tab */
+    
+    /* Grid for the Apps inside */
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)) !important;
+    gap: 10px !important;
+}
+
+/* 3. TOP-LEFT TAB (The Group Name) 
+   We style the legend/header to look like the solid "Weyland-Yutani" chip */
+[part="app-group-header"] {
+    position: absolute !important;
+    top: -14px !important; /* Move it UP to sit on the border line */
+    left: -2px !important; /* Align with left border edge */
+    
+    /* Sizing */
+    display: inline-block !important;
+    width: auto !important;
+    height: auto !important;
+    
+    /* "Chip" Styling */
+    background-color: var(--alien-acid) !important; /* Solid Green */
+    padding: 2px 12px !important;
+    border: none !important;
+    box-shadow: 0 0 10px var(--alien-acid) !important; /* The Glow */
+    z-index: 10;
+}
+
+/* 4. TEXT INSIDE TOP TAB */
+[part="app-group-header"] h2 {
+    color: #000000 !important; /* Black Text */
+    font-family: 'Quantico', sans-serif !important;
+    font-weight: 700 !important; /* Bold */
+    font-size: 0.85rem !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    text-shadow: none !important; /* Remove text glow so it's readable on green */
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.2 !important;
+}
+
+/* 5. BOTTOM-RIGHT TAB (The Technical Data)
+   This reads the 'data-app-count' attribute from the HTML and prints it! */
+[part="app-group"]::after {
+    content: "SYS_COUNT: " attr(data-app-count); /* Example: "SYS_COUNT: 7" */
+    
+    position: absolute;
+    bottom: -11px; /* Hang off the bottom */
+    right: -2px;   /* Align right */
+    
+    background-color: var(--alien-acid-dim); /* Darker Green/Amber for secondary info */
+    color: #000;
+    
+    font-family: 'Quantico', monospace;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 1px 8px;
+    pointer-events: none;
+}
+
+/* 6. APP CARDS (Standard Compact Style) */
+[part="card"] {
+    min-height: 50px !important;
+    background: rgba(0, 0, 0, 0.6) !important;
+    border: 1px solid var(--alien-acid-dim) !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    padding: 5px 10px !important;
+}
+
+/* 7. ICONS (Green Filter) */
+[part="card-header-icon"] img, 
+[part="card-header-icon"] svg,
+[part="icon insignia"] {
+    height: 28px !important; 
+    width: 28px !important;
+    filter: grayscale(100%) sepia(100%) hue-rotate(60deg) saturate(600%) brightness(0.8) !important;
+    opacity: 0.8 !important;
+    transition: all 0.2s ease !important;
+}
+
+/* 8. APP TEXT */
+[part="card-title"] {
+    font-size: 0.8rem !important;
+    color: var(--alien-acid) !important;
+    text-transform: uppercase;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    margin-left: 8px !important;
+}
+
+/* --- HOVER EFFECTS --- */
+[part="card"]:hover {
+    border-color: var(--alien-acid) !important;
+    background: rgba(182, 255, 0, 0.1) !important;
+    transform: translateY(-1px);
+}
+
+[part="card"]:hover [part="card-header-icon"] img,
+[part="card"]:hover [part="card-header-icon"] svg,
+[part="card"]:hover [part="icon insignia"] {
+    filter: none !important;
+    opacity: 1 !important;
+}
