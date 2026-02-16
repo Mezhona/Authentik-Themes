@@ -565,3 +565,33 @@ ak-alert a:hover, .pf-c-alert a:hover {
     opacity: 1 !important;
     transform: scale(1.1);
 }
+
+/* ==========================================================================
+   13. MOBILE LOGO FIX
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+    /* 1. Unlock the container height so the logo fits */
+    .pf-c-page__header-brand,
+    .pf-c-page__header-brand-link,
+    div[role="banner"] {
+        overflow: visible !important;
+        min-height: 50px !important; /* Force header slightly taller */
+    }
+
+    /* 2. Super-size the logo image */
+    .pf-c-page__header-brand-link img,
+    aside.brand .logo img,
+    .pf-c-brand img {
+        height: 45px !important;       /* Force physical pixel height */
+        width: auto !important;
+        max-height: none !important;   /* Remove restriction */
+        
+        /* visual zoom to make it pop */
+        transform: scale(1.4) !important; 
+        transform-origin: left center !important;
+        
+        /* Adjust positioning if it hits the edge */
+        margin-left: 0px !important; 
+        margin-top: 5px !important;
+    }
+}
